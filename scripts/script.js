@@ -54,7 +54,8 @@ subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
 
 // Add the class of flex-around to the subMenuEl element.
 subMenuEl.classList.add('flex-around');
-
+subMenuEl.style.position='absolute';
+subMenuEl.style.top='0';
 // Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
 let topMenuLinks = topMenuEl.querySelectorAll('a');
 
@@ -73,12 +74,27 @@ function handleClick(e) {
   // The event listener should add the active class to the <a> element that was clicked, unless it was already active, in which case it should remove it.
   if (e.target.classList.contains('active')) {
     e.target.classList.remove('active');
+    subMenuEl.style.top = '0%';
   }
-  else
+  else {
     e.target.classList.add('active');
-  
-    // The event listener should remove the active class from each other <a> element in topMenuLinks - whether the active class exists or not.
+    
+    for (let link of menuLinks) {
+      console.log(e.target.textContent);
+      console.log(link.text);
+      if (link.text === e.target.textContent && link.subLinks) {
+        console.log(link.subLinks);
+        subMenuEl.style.top ='100%';
+        break;
+      }
+    }
+
+  }
+
+  // The event listener should remove the active class from each other <a> element in topMenuLinks - whether the active class exists or not.
   for (link of topMenuLinks) {
+    console.log(link)
+    console.log(e.target);
     if (link !== e.target) {
       link.classList.remove('active');
     }
