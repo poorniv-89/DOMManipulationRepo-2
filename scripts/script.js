@@ -80,23 +80,33 @@ function handleClick(e) {
     e.target.classList.add('active');
     
     for (let link of menuLinks) {
+      linksArray = link.subLinks;
       console.log(e.target.textContent);
       console.log(link.text);
-      if (link.text === e.target.textContent && link.subLinks) {
-        console.log(link.subLinks);
+      if (link.text === e.target.textContent && linksArray) {
         subMenuEl.style.top ='100%';
+        buildSubmenu(linksArray);
         break;
       }
     }
 
   }
-
   // The event listener should remove the active class from each other <a> element in topMenuLinks - whether the active class exists or not.
   for (link of topMenuLinks) {
-    console.log(link)
-    console.log(e.target);
     if (link !== e.target) {
       link.classList.remove('active');
     }
   }
 }
+function buildSubmenu(linksArray)
+{
+  subMenuEl.innerHTML = '';
+  for(let link of linksArray)
+  {
+    let newLink = document.createElement('a');
+    newLink.setAttribute('href', link.href);
+    newLink.textContent = link.text;
+    subMenuEl.appendChild(newLink);
+  }
+}
+
