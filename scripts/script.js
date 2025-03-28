@@ -85,14 +85,14 @@ function topMenuHandleClick(e) {
       console.log(link.text);
       if (link.text === e.target.textContent && linksArray) {
         subMenuEl.style.top ='100%';
-        console.log("linksarray", linksArray);
         buildSubmenu(linksArray); //calling submenu elements
         break;
       }
       else
       {
         //If the ABOUT link is clicked, an <h1>About</h1> should be displayed.
-        mainEl.innerHTML=`<h1>${e.target.textContent}</h1>`
+      
+        mainEl.innerHTML=`<h1>${e.target.textContent.toUpperCase()}</h1>`
       }
     }
 
@@ -134,5 +134,5 @@ function subMenuHandleClick(e)
     link.classList.remove('active');
   }
   //Update the contents of mainEl, within an <h1>, to the contents of the <a> element clicked within subMenuEl.
-  mainEl.innerHTML=`<h1>${e.target.textContent}</h1>`
+  mainEl.innerHTML=`<h1>${e.target.textContent.toUpperCase()}</h1>`
 }
